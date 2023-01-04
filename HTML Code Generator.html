@@ -1,0 +1,172 @@
+<html>
+  <body>
+  <style>
+  textarea {
+    width: 95%;
+	}
+  .red-button {
+    border-radius: 20px;
+	border: 2px solid red;
+  }
+  .yellow-button {
+    border-radius: 20px;
+	border: 2px solid yellow;
+  }
+  .green-button {
+    border-radius: 20px;
+	border: 2px solid green;
+  }
+  .blue-button {
+    border-radius: 20px;
+	border: 2px solid blue;
+  }
+  .turquoise-button {
+    border-radius: 20px;
+	border: 2px solid turquoise;
+  }
+  .black-button {
+    border-radius: 20px;
+	border: 2px solid black;
+  }
+  .gray-button {
+    border-radius: 20px;
+	border: 2px solid gray;
+  }
+  .purple-button {
+    border-radius: 20px;
+	border: 2px solid purple;
+  }
+  </style>
+  
+	<h1>HTML Script Creator for UM Western Moodle</h1>
+	
+	<h2>Callout Card Generator</h2>
+
+    <label for="lineone">Enter the title for the card:</label><br>
+    <textarea rows="1" id="lineone" name="message" placeholder="" value =""></textarea><br>
+	
+    <label for="linetwo">Enter the heading for the card:</label><br>
+    <textarea rows="1" id="linetwo" name="message" placeholder="" value =""></textarea><br>
+	
+    <label for="linethree">Enter the body text for the card:</label><br>
+    <textarea rows="10" id="linethree" name="message" placeholder="" value =""></textarea><br><p></p>
+	
+    <button onclick="ColorCard(0)" class="red-button">Create Red Card</button>
+	<button onclick="ColorCard(1)" class="yellow-button">Create Yellow Card</button>
+	<button onclick="ColorCard(2)" class="green-button">Create Green Card</button>
+	<button onclick="ColorCard(3)" class="blue-button">Create Blue Card</button>
+	<button onclick="ColorCard(4)" class="turquoise-button">Create Turquoise Card</button>
+	<button onclick="ColorCard(5)" class="black-button">Create Black Card</button>
+	<button onclick="ColorCard(6)" class="gray-button">Create Gray Card</button> <br><br><br>
+	
+	<pre>
+<code id="html-code1"></code>
+    </pre>
+	
+	<h2>Email Link Generator</h2>
+	
+    <label for="emailaddress">Enter the email address:</label><br>
+    <textarea rows="1" id="emailaddress" name="message" placeholder="" value =""></textarea><br><p></p>
+	
+	<button onclick="Email()" class="purple-button">Create Email Link</button><br><br><br>
+	
+	<pre>
+<code id="html-code2"></code>
+    </pre>
+    <div id="output2"></div>
+	
+	<h2>URL Link Generator</h2>
+	
+    <label for="thetext">Enter the text you want displayed:</label><br>
+    <textarea rows="1" id="thetext" name="message" placeholder="" value =""></textarea><br>
+	
+    <label for="theurl">Enter the url:</label><br>
+    <textarea rows="1" id="theurl" name="message" placeholder="" value =""></textarea><br><p></p>
+	
+	<button onclick="UrlCreate()" class="purple-button">Create URL</button><br><br>
+	
+	<pre>
+<code id="html-code3"></code>
+    </pre>
+
+
+    <script>
+      function ColorCard(colorCode) {
+        // Get the line one text
+        let lineone = document.getElementById("lineone").value;
+				
+        // Get the line two text
+        let linetwo = document.getElementById("linetwo").value;
+		
+        // Get the line three text
+        let linethree = document.getElementById("linethree").value;
+		
+		let color = "danger"; // red
+		
+		if(colorCode==1)
+			color = "warning"; // yellow
+			
+		if(colorCode==2)
+			color = "success"; // green
+			
+		if(colorCode==3)
+			color = "primary"; // blue
+			
+		if(colorCode==4)
+			color = "info"; // turquoise
+			
+		if(colorCode==5)
+			color = "dark"; // black
+			
+		if(colorCode==6)
+			color = "secondary"; // gray
+		
+		linethree = linethree.replace(/\n/g, "\n<br>"); // handle line breaks in body text
+
+        // Add Color Card to the input text
+        let output1 = "<div class='card text mb-3'>\n<span class='border border-" + color + " border-5 rounded'>\n<div class='card-header bg-" + color + " text-white'>\n<h4>" + lineone + "</h4>\n</div>\n<div class='card-body'>\n<h5 class='card-title'>\n" + linetwo + "\n</h5><p class='card-text'>\n" + linethree + "\n</p>\n</div>\n</span>\n</div>"
+;
+
+        // Replace angle brackets with html code
+		output1 = output1.replace(/</g, "&lt;");
+		output1 = output1.replace(/>/g, "&gt;");
+
+        // Display the output
+        document.getElementById("html-code1").innerHTML = output1;
+      }
+	  
+	  function Email() {
+        // Get the email address
+        let emailaddress = document.getElementById("emailaddress").value;
+
+        // Create email address
+        let output2 = '<a href="mailto:' + emailaddress + '">' + emailaddress + '</a>';	
+		
+        // Replace angle brackets with html code
+		output2 = output2.replace(/</g, "&lt;");
+		output2 = output2.replace(/>/g, "&gt;");
+        
+		// Display the output
+        document.getElementById("html-code2").innerHTML = output2;
+      }	  
+	  
+	  function UrlCreate() {
+        // Get the text to display
+        let thetext = document.getElementById("thetext").value;
+				
+        // Get the url
+        let theurl = document.getElementById("theurl").value;
+
+        // Create link
+        let output3 = '<a href="' + theurl + '">' + thetext + '</a>';	
+		
+        // Replace angle brackets with html code
+		output3 = output3.replace(/</g, "&lt;");
+		output3 = output3.replace(/>/g, "&gt;");
+        
+		// Display the output
+        document.getElementById("html-code3").innerHTML = output3;
+      }
+    </script>
+  </body>
+</html>
